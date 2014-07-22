@@ -10,7 +10,8 @@ class OntologyReasoner(object):
         pass
 
     def _initOntology(self):
-        storage = RDF.HashStorage('dbpedia', options="hash-type='bdb'")
+        #storage = RDF.HashStorage('dbpedia', options="hash-type='bdb'")
+        storage = RDF.MemoryStorage()
         model = RDF.Model(storage)
         rdfParser = RDF.Parser(name="rdfxml")
         ontologyPath = 'file://' + os.path.join(self._getCurrentDir(), 'dbpedia_3.9.owl')
@@ -21,7 +22,6 @@ class OntologyReasoner(object):
         return os.path.dirname(os.path.realpath(__file__))
 
     def findBottomConcept(self, concepts):
-        print concepts
         if(not concepts): #concepts are empty
             return ''
         result = []
